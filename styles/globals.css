@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  font-family: 'gilroy';
+  overflow: hidden;
+}
+
+h1 {
+  background: -webkit-linear-gradient(#ff2424,rgb(254, 64, 64),rgb(255, 51, 245), #ff4040);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.arrow{
+  clip-path: polygon(50% 0%, 100% 0, 50% 100%, 0 0);
+}
