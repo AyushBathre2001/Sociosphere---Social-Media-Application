@@ -10,6 +10,7 @@ import { userAction } from '@/redux/actions/userAction'
 const Profile = () => {
     const [isOpen,setIsOpen] = useState(false)
     const [isPost,setIsPost] = useState(false)
+    const [fetch,setFetch] = useState(false)
     const user = useSelector((state)=>state.user)
     const dispatch = useDispatch()
 
@@ -22,6 +23,7 @@ const Profile = () => {
         const {data} = await axios.patch(`${process.env.NEXT_PUBLIC_HOST}/api/post/like`,{
             userId,postId
         })
+        setFetch(true)
     }
 
     useEffect(()=>{
@@ -42,8 +44,9 @@ const Profile = () => {
         }
     
         fetchuser()
+        setFetch(false)
      
-      },[likePost])
+      },[fetch])
 
     return (
             

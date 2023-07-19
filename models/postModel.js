@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema({
 
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     },
 
     image:{
@@ -18,14 +18,14 @@ const postSchema = mongoose.Schema({
 
     like:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     }],
     
     Comment:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     }]
     
 })
 
-module.exports = mongoose.models.post || mongoose.model('post',postSchema)
+module.exports = mongoose.models.Post || mongoose.model('Post',postSchema)

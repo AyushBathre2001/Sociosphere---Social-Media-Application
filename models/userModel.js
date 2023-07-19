@@ -24,15 +24,15 @@ const userSchema = mongoose.Schema({
     },
     posts:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'post'
+        ref:'Post'
     }],
     friends:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     }],
     fpcode:{
         type:String
     }
 })
 
-module.exports = mongoose.models.user || mongoose.model('user',userSchema)
+module.exports = mongoose.models.User || mongoose.model('User',userSchema)

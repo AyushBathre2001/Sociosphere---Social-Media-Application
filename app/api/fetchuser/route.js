@@ -13,8 +13,8 @@ export async function GET(req) {
         var decoded = jwt.verify(socioToken, process.env.JWT_SECRET);
         if (decoded) {
             const user = await userModel.findOne({_id:decoded.user})
-                .populate('posts')
-                .populate('friends')
+                .populate('posts','-__v')
+                // .populate('friends')
                 // .exec()
 
             if (user) {
