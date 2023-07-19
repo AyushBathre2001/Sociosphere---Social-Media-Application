@@ -1,9 +1,10 @@
-const connectDB = require('../../../utils/dbConnect')
-const userModel = require('../../../models/userModel')
-const bcrypt = require('bcrypt');
+import connectDB from '../../../utils/dbConnect';
+import userModel from '../../../models/userModel';
+connectDB();
+
+import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server';
 var jwt = require('jsonwebtoken');
-connectDB()
 
 
 export async function POST(req, res) {

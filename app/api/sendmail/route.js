@@ -1,8 +1,9 @@
 const nodemailer = require('nodemailer');
 import { NextResponse } from 'next/server';
-const connectDB = require('../../../utils/dbConnect')
-connectDB()
-const userModel = require('../../../models/userModel')
+import connectDB from '../../../utils/dbConnect';
+import userModel from '../../../models/userModel';
+connectDB();
+
 
 
 export async function POST(req) {

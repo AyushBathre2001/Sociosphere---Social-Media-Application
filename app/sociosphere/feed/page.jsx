@@ -9,10 +9,10 @@ const Feed = () => {
     <div className='main min-h-screen  items-start justify-evenly flex z-50'>
       <section className='h-[50vh] flex flex-col items-center justify-center p-4 w-[20vw] bg-white rounded-lg shadow-md'>
         <div className="circle w-[100px] overflow-hidden h-[100px] rounded-full border border-gray-300">
-        {user.user && <img src={user.user.image} className='w-full h-full object-cover' alt="" />}
+        {user.username && <img src={user.image} className='w-full h-full object-cover' alt="" />}
 
         </div>
-        {user.user && <p className='text-xs text-center my-5'>{user.user.about}</p>}
+        {user.username && <p className='text-xs text-center my-5'>{user.about}</p>}
         <Link href={'/sociosphere/profile'}><button className='px-4 py-2 rounded-full bg-red-500 text-sm font-medium text-white'>View Profile</button></Link>
       </section>
       <section className='h-[90vh] w-[55vw]  overflow-scroll  bg-white rounded-lg shadow-md'>
@@ -53,7 +53,7 @@ const Feed = () => {
         </div>
         <div className='friends overflow-scroll w-full mt-5'>
           {
-            user.user && user.user.friends.map(()=>{
+            user.username && user.friends.map(()=>{
               return <div className='w-full mt-2 h-[50px] border border-gray-200 rounded-md flex items-center p-2 justify-start'>
               <div className='w-[35px] h-[35px] rounded-full bg-black'>
   
@@ -63,7 +63,7 @@ const Feed = () => {
             }) 
           }
 
-          {user.user && user.user.friends.length<1 && <div className="w-full flex items-center justify-center p-10 text-sm flex-col text-center "><p className="font-bold text-gray-600">0 Friends</p> <p className="font-normal text-xs text-gray-600 mt-2">Send request to users to make some friends.</p>
+          {user.username && user.friends.length<1 && <div className="w-full flex items-center justify-center p-10 text-sm flex-col text-center "><p className="font-bold text-gray-600">0 Friends</p> <p className="font-normal text-xs text-gray-600 mt-2">Send request to users to make some friends.</p>
            </div>}
           
         

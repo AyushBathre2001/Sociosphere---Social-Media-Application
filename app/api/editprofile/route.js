@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-
-const connectDB = require('../../../utils/dbConnect');
+import connectDB from '../../../utils/dbConnect';
+import userModel from '../../../models/userModel';
 connectDB();
-const userModel = require('../../../models/userModel');
 
 
 export async function PATCH(req) {

@@ -1,19 +1,21 @@
 "use client"
 
-import React, { useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { userAction } from '@/redux/actions/userAction'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const Sociolayout = ({children}) => {
 
   const dispatch = useDispatch()
+  const router = useRouter()
   
 
   useEffect(()=>{
-
     const fetchuser = async ()=>{
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_HOST}/api/fetchuser`,
@@ -33,8 +35,13 @@ const Sociolayout = ({children}) => {
     fetchuser()
  
   },[])
-  
 
+
+  const handleLogout = ()=>{
+    localStorage.removeItem('socioToken')
+    router.push('/')
+  }
+  
   return (
     <>
     <div className='Navbar w-full '>
@@ -49,7 +56,7 @@ const Sociolayout = ({children}) => {
             <input type="search" className='w-[350px] px-3 py-2 border border-gray-400 rounded-md bg-white text-sm' placeholder='Search...' />
         </div>
         <div>
-          <Link href={'/auth/signup'}><button className='px-5 text-sm font-semibold py-2 bg-black text-white rounded-full'>LOGOUT</button></Link>
+          <button onClick={handleLogout} className='px-5 text-sm font-semibold py-2 bg-black text-white rounded-full'>LOGOUT</button>
         </div>
       </div>
     </div>

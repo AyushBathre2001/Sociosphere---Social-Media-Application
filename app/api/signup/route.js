@@ -1,9 +1,10 @@
-const connectDB = require('../../../utils/dbConnect')
-const userModel = require('../../../models/userModel')
+import connectDB from '../../../utils/dbConnect';
+import userModel from '../../../models/userModel';
+connectDB();
+
 const bcrypt = require('bcrypt');
 import { NextResponse } from 'next/server';
 
-connectDB()
 
 
 export async function POST(req, res) {

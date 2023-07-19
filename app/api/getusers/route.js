@@ -1,8 +1,9 @@
-const connectDB = require('../../../utils/dbConnect')
-const userModel = require('../../../models/userModel')
-import { NextResponse } from 'next/server';
-connectDB()
+import connectDB from '../../../utils/dbConnect';
+import userModel from '../../../models/userModel';
+connectDB();
 
+
+import { NextResponse } from 'next/server';
 
 export async function POST(req, res) {
     try {
@@ -10,7 +11,7 @@ export async function POST(req, res) {
         const { query } = body
         const user = await userModel.findOne({ username : query })
         if (user) {
-            return NextResponse.json({ "success": true })
+            return NextResponse.json({ "success": true,"user":user.username })
         }
         else {
             return NextResponse.json({ "success": false })

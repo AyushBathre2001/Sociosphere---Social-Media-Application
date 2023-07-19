@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { userAction } from '@/redux/actions/userAction'
 
 const ProfileModal = ({ isOpen, closeModal, user }) => {
+  const dispatch = useDispatch()
   const [image, setImage] = useState(null)
   const [details, setDetails] = useState({ username: user.username, about: user.about, image: "" })
+  const [isLoading, setIsloading] = useState(false)
+  const [usernameAvailable, setUsernameAvailable] = useState()
 
   const onChangeHandle = (e) => {
     setDetails({ ...details, [e.target.name]: e.target.value })
   }
 
-  const onChangeFile = (e)=>{
+  const onChangeFile = (e) => {
     setImage(e.target.files[0])
   }
-  
 
   const handleUpdate = async () => {
-
+    setIsloading(true)
     const formData = new FormData();
     formData.append('file', image);
     formData.append('upload_preset', 'ml_default');
@@ -42,8 +46,46 @@ const ProfileModal = ({ isOpen, closeModal, user }) => {
       })
     }
 
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/fetchuser`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "socioToken": localStorage.getItem('socioToken')
+        }
+      }
+    );
+
+    if (data.success) {
+      dispatch(userAction(data.user))
+    }
+
+    setIsloading(false)
+
     closeModal()
   };
+
+
+  const checkUsernameAvailable = async () => {
+    const { data } = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/getusers`, {
+      "query": details.username
+    })
+    if (data.success) {
+      if(data.user == user.username){
+        setUsernameAvailable(true)
+      }
+      else{
+        setUsernameAvailable(false)
+      }
+    }
+    else {
+      setUsernameAvailable(true)
+    }
+  }
+
+  useEffect(() => {
+    checkUsernameAvailable()
+  }, [details.username])
 
   return (
     <div className={`shadow w-full min-h-screen ${isOpen ? "flex" : "hidden"} items-center justify-center fixed top-0 z-50 bg-white bg-opacity-50`}>
@@ -58,14 +100,17 @@ const ProfileModal = ({ isOpen, closeModal, user }) => {
         </div>
         <div className='w-full mt-5 flex flex-col '>
           <label className='text-sm font-semibold text-red-500' htmlFor="username">Username</label>
-          <input type="text" onChange={onChangeHandle} value={details.username} name='username' className='border py-2 px-2 text-sm rounded-md border-gray-300' id='username' />
+          <input type="text" onChange={onChangeHandle} value={details.username} name='username' className={` ${!usernameAvailable ? "border-red-500" : "border-gray-300"  } border py-2 px-2 text-sm rounded-md border-gray-300' id='username`} />
+          {
+            !usernameAvailable && <span className='text-red-500 text-xs font-medium'>Not Available!</span>
+          }
         </div>
         <div className='w-full mt-4 flex flex-col'>
           <label htmlFor="about" className='text-sm font-semibold text-red-500'>About</label>
           <textarea onChange={onChangeHandle} value={details.about} className='border resize-none rounded-md border-gray-300 p-2' name="about" id="about" cols="30" rows="6"></textarea>
         </div>
         <div>
-          <button onClick={handleUpdate} className='px-4 mt-4 py-2 rounded-full bg-red-500 text-white font-semibold text-md'>Update</button>
+          <button disabled={isLoading || !usernameAvailable ? true : false} onClick={handleUpdate} className='w-[100px] h-[40px] disabled:bg-red-100 flex items-center justify-center mt-4 py-2 rounded-full bg-red-500 text-white font-semibold text-md'>{isLoading ? <img className='w-[35px]' src='/assets/images/loader.gif' /> : "Update"}</button>
         </div>
       </div>
     </div>
