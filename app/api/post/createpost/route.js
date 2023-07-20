@@ -1,7 +1,7 @@
 
 import connectDB from '../../../../utils/dbConnect';
-import userModel from '../../../../models/userModel';
-import postModel from '../../../../models/postModel';
+import User from '../../../../models/userModel';
+import Post from '../../../../models/postModel';
 connectDB();
 
 
@@ -10,13 +10,13 @@ export async function POST(req) {
     const body = await req.json();
     const { user,image,caption } = body;
    
-    const post = await postModel.create({
+    const post = await Post.create({
         user,image,caption
     }
     );
 
     if(post){
-        const founduser = await userModel.findOne({_id:user})
+        const founduser = await User.findOne({_id:user})
         founduser.posts = [...founduser.posts,post._id]
         await founduser.save()
         return new Response(JSON.stringify({success:true}))

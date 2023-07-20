@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const User = require('./userModel')
 
-const postSchema = mongoose.Schema({
+const PostSchema = mongoose.Schema({
 
     user:{
         type:mongoose.Schema.Types.ObjectId,
@@ -22,10 +23,18 @@ const postSchema = mongoose.Schema({
     }],
     
     Comment:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        userId : {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        },
+        comment:{
+            type:String
+        }
+        
     }]
     
 })
 
-module.exports = mongoose.models.Post || mongoose.model('Post',postSchema)
+var Post = mongoose.models.Post || mongoose.model('Post',PostSchema)
+
+export default Post

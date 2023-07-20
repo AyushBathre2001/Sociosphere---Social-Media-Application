@@ -7,20 +7,16 @@ export async function PATCH(req) {
     try {
 
         const body = await req.json()
-        const {userId,postId} = body
-        let post = await Post.findById(postId)
-        if(post.like.includes(userId)){
-            let newArr = post.like.filter((item) => item != userId);
-
-            post.like = newArr
+        const {userId,postId,comment} = body
+        let post = await Post.findById(postId).populate('Comment.userId')
+        if(userId && comment){
+            post.Comment = [...post.Comment,{userId:userId,comment:comment}]
             await post.save()
+            return NextResponse.json({ "success": true,"comments":post.Comment })
         }
         else{
-            post.like = [...post.like,userId]
-            await post.save()
+            return NextResponse.json({ "success": true,"comments":post.Comment })
         }
-       
-        return NextResponse.json({ "success": true })
 
     } catch (error) {
 

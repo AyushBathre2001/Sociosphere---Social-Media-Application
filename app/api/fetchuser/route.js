@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 import { headers } from 'next/headers'
@@ -12,10 +12,14 @@ export async function GET(req) {
         const socioToken = headersInstance.get('socioToken')
         var decoded = jwt.verify(socioToken, process.env.JWT_SECRET);
         if (decoded) {
-            const user = await userModel.findOne({_id:decoded.user})
+            const user = await User.findOne({_id:decoded.user})
                 .populate('posts','-__v')
-                // .populate('friends')
-                // .exec()
+                .populate({
+                    path:'posts',
+                    populate:{path:'Comment.userId'}
+                })
+                .populate('friends')
+                .exec()
 
             if (user) {
                 return NextResponse.json({ "success": true, "user": user })

@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 
@@ -9,7 +9,7 @@ export async function POST(req, res) {
     try {
         const body = await req.json()
         const { query } = body
-        const user = await userModel.findOne({ username : query })
+        const user = await User.findOne({ username : query })
         if (user) {
             return NextResponse.json({ "success": true,"user":user.username })
         }

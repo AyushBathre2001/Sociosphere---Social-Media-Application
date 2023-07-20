@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 import bcrypt from 'bcrypt'
@@ -11,7 +11,7 @@ export async function POST(req, res) {
     try {
         const body = await req.json()
         const { username, password } = body
-        const user = await userModel.findOne({username})
+        const user = await User.findOne({username})
         if(user){
             const match = await bcrypt.compare(password, user.password)
             if(match){

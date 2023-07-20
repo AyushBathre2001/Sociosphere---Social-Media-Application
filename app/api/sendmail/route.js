@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 import { NextResponse } from 'next/server';
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 
@@ -12,7 +12,7 @@ export async function POST(req) {
         const body = await req.json()
         const { email, validationCode } = body
 
-        const user = await userModel.findOne({ email })
+        const user = await User.findOne({ email })
         if (user) {
             return NextResponse.json({ "success": false, "message": "User already exist!" })
         }

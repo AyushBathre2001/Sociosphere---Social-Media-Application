@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { userAction } from '@/redux/actions/userAction'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import Head from 'next/head'
 
 const Sociolayout = ({children}) => {
 
@@ -44,6 +45,10 @@ const Sociolayout = ({children}) => {
   
   return (
     <>
+    <Head>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet"></link>
+
+    </Head>
     <div className='Navbar w-full '>
       <div className='overlay w-full h-full absolute -z-10 bg-white bg-opacity-95'></div>
       <img className='w-full h-full object-cover absolute -z-20' src="/assets/images/mainbg.jpg" />

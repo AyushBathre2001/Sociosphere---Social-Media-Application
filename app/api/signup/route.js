@@ -1,10 +1,9 @@
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 const bcrypt = require('bcrypt');
 import { NextResponse } from 'next/server';
-
 
 
 export async function POST(req, res) {
@@ -15,7 +14,7 @@ export async function POST(req, res) {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
 
-        const user = await userModel.create({
+        const user = await User.create({
             username, email, "password":hash
         })
 

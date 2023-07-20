@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Post = require('./postModel')
 
-const userSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     username:{
         type:String,
         required:true
@@ -35,4 +36,6 @@ const userSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.models.User || mongoose.model('User',userSchema)
+var User = mongoose.models.User || mongoose.model('User',UserSchema)
+
+export default User

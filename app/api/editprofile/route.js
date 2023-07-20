@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectDB from '../../../utils/dbConnect';
-import userModel from '../../../models/userModel';
+import User from '../../../models/userModel';
 connectDB();
 
 
@@ -9,7 +9,7 @@ export async function PATCH(req) {
     const body = await req.json();
     const { username, about, email,image } = body;
    
-    const user = await userModel.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { email },
       { username, about, image },
       { new: true }
