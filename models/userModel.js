@@ -31,6 +31,10 @@ const UserSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     }],
+    requests:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }],
     fpcode:{
         type:String
     }
