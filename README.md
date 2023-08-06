@@ -23,6 +23,11 @@ Welcome to the Social Media Application, a Next.js 13 based social media platfor
 - Send Friend Requests: Users can send and accept friend requests to connect with other users.
 
 ## Screenshots
+![Screenshot 2023-08-06 104723](https://github.com/AyushBathre2001/Sociosphere---Social-Media-Application/assets/97656404/a42db1b7-6809-4394-a1e9-80cf62b0a70d)
+![Screenshot 2023-08-06 104805](https://github.com/AyushBathre2001/Sociosphere---Social-Media-Application/assets/97656404/f8f22203-5bf9-40c6-9261-0189849d67e7)
+![Screenshot 2023-08-06 104842](https://github.com/AyushBathre2001/Sociosphere---Social-Media-Application/assets/97656404/830789ef-e0ae-4446-a6d3-1643cfd4ac9a)
+![Screenshot 2023-08-06 104904](https://github.com/AyushBathre2001/Sociosphere---Social-Media-Application/assets/97656404/524860ed-4bd5-4613-8c8b-ba1387f311e6)
+![Screenshot 2023-08-06 104924](https://github.com/AyushBathre2001/Sociosphere---Social-Media-Application/assets/97656404/e6d04994-f375-48c4-a5e2-9aa28d0f8aa3)
 
 ## Getting Started
 Follow the steps below to set up and run the Social Media Application on your local machine.
