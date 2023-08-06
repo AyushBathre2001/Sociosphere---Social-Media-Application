@@ -10,7 +10,6 @@ const PostModal = ({ isPost, closeModal,user }) => {
   const [caption, setCaption] = useState('')
   const [isLoading, setIsloading] = useState(false)
 
- console.log(user._id)
   const onChange = (e) => {
     if (e.target.name === "image") {
       setImage(e.target.files[0])

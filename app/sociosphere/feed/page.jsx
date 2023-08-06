@@ -1,10 +1,12 @@
 "use client"
 import Link from "next/link"
 import {useSelector} from 'react-redux'
+
+
 const Feed = () => {
 
   const user = useSelector((state)=>state.user)
-  
+
   return (
     <div className='main min-h-screen  items-start justify-evenly flex z-50'>
       <section className='h-[50vh] flex flex-col items-center justify-center p-4 w-[20vw] bg-white rounded-lg shadow-md'>
@@ -13,38 +15,14 @@ const Feed = () => {
 
         </div>
         {user.username && <p className='text-xs text-center my-5'>{user.about}</p>}
-        <Link href={'/sociosphere/profile'}><button className='px-4 py-2 rounded-full bg-red-500 text-sm font-medium text-white'>View Profile</button></Link>
+        <Link href={`/sociosphere/profile/${user.username}`}><button className='px-4 py-2 rounded-full bg-red-500 text-sm font-medium text-white'>View Profile</button></Link>
       </section>
-      <section className='h-[90vh] w-[55vw]  overflow-scroll  bg-white rounded-lg shadow-md'>
-
-        <div className="posts flex flex-col items-center justify-start w-full overflow-scroll">
-             <div class="max-w-[70%] rounded overflow-hidden  shadow-lg mt-16">
-            <img class="w-full h-[450px] object-cover" src="/assets/images/model.jpg" alt="Sunset in the mountains" />
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-              <p class="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-              </p>
-            </div>
-            <div class="px-6 w-full flex items-center justify-between font-bold pt-4 pb-2 text-black">
-              <div className='w-[50%] flex items-center justify-center cursor-pointer shadow-lg  p-2'>Like <i class="ri-heart-line text-xl"></i></div>
-              <div className='w-[50%] flex items-center justify-center cursor-pointer shadow-lg  p-2'>Comment<i class="ri-chat-4-fill text-xl"></i></div>
-            </div>
+      <section className='h-[90vh] relative w-[55vw] flex justify-center items-center overflow-scroll  bg-white rounded-lg shadow-md'>
+          
+          <div className="tri w-full h-7 bg-red-500 absolute top-0">
           </div>
-             <div class="max-w-[70%] rounded overflow-hidden  shadow-lg mt-16">
-            <img class="w-full h-[450px] object-cover" src="/assets/images/model.jpg" alt="Sunset in the mountains" />
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-              <p class="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-              </p>
-            </div>
-            <div class="px-6 w-full flex items-center justify-between font-bold pt-4 pb-2 text-black">
-              <div className='w-[50%] flex items-center justify-center cursor-pointer shadow-lg  p-2'>Like <i class="ri-heart-line text-xl"></i></div>
-              <div className='w-[50%] flex items-center justify-center cursor-pointer shadow-lg  p-2'>Comment<i class="ri-chat-4-fill text-xl"></i></div>
-            </div>
-          </div>
-        </div>
+           <p className="text-sm text-gray-500">No feed Available.</p>
+       
 
       </section>
       <section className='h-[80vh] w-[20vw] bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-start'>
@@ -53,13 +31,23 @@ const Feed = () => {
         </div>
         <div className='friends overflow-scroll w-full mt-5'>
           {
-            user.username && user.friends.map(()=>{
-              return <div className='w-full mt-2 h-[50px] border border-gray-200 rounded-md flex items-center p-2 justify-start'>
-              <div className='w-[35px] h-[35px] rounded-full bg-black'>
-  
+            user.username && user.friends.map((item)=>{
+              return  <Link href={`/sociosphere/profile/${item.username}`}><div key={item._id} class="flex justify-center cursor-pointer relative ">
+
+              <div class="relative grid grid-cols-1 gap-4 p-3 mb-2 w-full border rounded-lg bg-white ">
+                <div class="relative flex gap-4">
+                  <img src={item.image} class="relative rounded-lg  bg-white border h-10 w-10" alt="" loading="lazy" />
+                  <div class="flex flex-col w-full">
+                    <div class="flex flex-row ">
+                      <p class="relative text-sm font-bold text-gray-800 whitespace-nowrap truncate overflow-hidden">{item.username}</p>
+                    </div>
+                    <p class="text-gray-400 text-sm">{item.email}</p>
+                  </div>
+                </div>
               </div>
-              <p className='text-sm font-medium ml-2 text-gray-700'>ayush2001</p>
+
             </div>
+            </Link>
             }) 
           }
 

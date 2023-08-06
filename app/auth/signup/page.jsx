@@ -185,8 +185,8 @@ const Signup = () => {
         </div>
       </div>
 
-      <div className="box rounded-lg mt-16 w-[70%] h-[70vh] flex shadow-xl ">
-        <div className="left rounded-lg  flex flex-col items-center justify-center p-8 h-full w-[60%] bg-white">
+      <div className="box rounded-lg mt-16 w-[40%] h-[70vh] flex shadow-xl ">
+        <div className="left rounded-lg  flex flex-col items-center justify-center p-8 h-full w-full bg-white">
         <h2 className='font-extrabold text-base mb-3 text-red-400'>SIGN UP</h2>
 
         {
@@ -245,9 +245,7 @@ const Signup = () => {
             <p className='mt-5'>or <Link href={'/auth/login'}><span className='font-bold text-red-500'>Login</span></Link></p>
 
         </div>
-        <div className="right rounded-lg w-[40%] h-full">
-          <img className='w-full h-full rounded-lg object-cover' src="/assets/images/model.jpg" alt="" />
-        </div>
+       
       </div>
 
      

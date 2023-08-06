@@ -2,9 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
+import { io } from 'socket.io-client'
+let socket
 
 
 const Home = () => {
+
 
   return (
     <div className='w-full h-[100vh] flex items-center justify-center'>

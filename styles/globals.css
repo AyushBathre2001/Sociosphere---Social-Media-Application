@@ -18,3 +18,7 @@ h1 {
 .arrow{
   clip-path: polygon(50% 0%, 100% 0, 50% 100%, 0 0);
 }
+
+.tri{
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+}
